@@ -1,0 +1,11 @@
+### Spring Actuator
+### actuator
+GET http://localhost:8081/actuator
+
+### application.yml 등에 management.endpoint.health.enabled=true 로 설정 가능
+### health
+GET http://localhost:8081/actuator/health
+
+### management.endpoints.web.exposure.include=health,info,shudown 등 여러 개의 서비스 노출 설정
+### actuator
+GET http://localhost:8081/autoator/shutdown

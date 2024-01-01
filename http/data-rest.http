@@ -1,0 +1,51 @@
+### Data Rest 테스트
+### 사용자 등록
+POST http://localhost:8081/people
+Content-Type: application/json
+
+{
+  "firstName": "Frodo",
+  "lastName": "Baggins"
+}
+
+### 전체 사용자 조회
+GET http://localhost:8081/people
+
+
+### 첫번째 people 조회
+GET http://localhost:8081/people/1
+
+### 검색 기능 조회
+GET http://localhost:8081/people/search
+
+### 검색 기능 조회 결과로 출력된 메소드로 조회
+GET http://localhost:8081/people/search/findByLastName?name=Baggins
+
+### PUT/PATCH/DELETE 등 REST Call 로 대체, 갱신, 삭제 등을 처리 가능
+PUT http://localhost:8081/people/1
+Content-Type: application/json
+
+{
+  "firstName": "Bilbo",
+  "lastName": "Baggins"
+}
+
+### 수정한 people 조회
+GET http://localhost:8081/people/1
+
+### PUT/PATCH/DELETE 등 REST Call 로 대체, 갱신, 삭제 등을 처리 가능
+PATCH http://localhost:8081/people/1
+Content-Type: application/json
+
+{
+  "firstName": "Bilbo Jr."
+}
+
+### PATCH people 조회
+GET http://localhost:8081/people/1
+
+### DELETE
+DELETE http://localhost:8081/people/1
+
+### DELETE people 조회
+GET http://localhost:8081/people

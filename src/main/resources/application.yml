@@ -1,0 +1,24 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    hikari:
+      driver-class-name: org.h2.Driver
+#     jdbc-url: jdbc:h2:mem:testdb;NON_KEYWORDS=user
+      jdbc-url: jdbc:h2:mem:testdb
+      username: sa
+      password:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        # hibernate 사용할 때에는 user 예약어로 인해 expected identifier 오류 발생할 때 조치
+        globally_quoted_identifiers: true
+  servlet:
+    multipart:
+      max-file-size: 128KB
+      max-request-size: 128KB
