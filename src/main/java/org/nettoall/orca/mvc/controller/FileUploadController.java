@@ -1,5 +1,6 @@
 package org.nettoall.orca.mvc.controller;
 
+import org.nettoall.orca.mvc.service.StorageFileNotFoundException;
 import org.nettoall.orca.mvc.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -25,11 +26,10 @@ public class FileUploadController {
         this.storageService = storageService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/upload")
     public String listUploadedFiles(Model model) throws IOException {
         model.addAttribute("files", storageService.loadAll().map(
-                path ->
-                        MvcUriComponentsBuilder.fromMappingName(FileUploadController.class,
+                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
                                 "serveFile",
                                 path.getFileName().toString()).build().toUri().toString())
                 .collect(Collectors.toList()));
@@ -49,7 +49,7 @@ public class FileUploadController {
                 "\"").body(file);
     }
 
-    @PostMapping("/")
+    @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
         storageService.store(file);
@@ -57,7 +57,7 @@ public class FileUploadController {
                 "You successfully uploaded " +
                 file.getOriginalFilename() + "!");
 
-        return "redirect:/";
+        return "redirect:/upload";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

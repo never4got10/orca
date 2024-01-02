@@ -28,7 +28,7 @@ public class HelloController {
      * @param name
      * @return
      */
-    @GetMapping("/hello")
+    @GetMapping("/hellorest")
     public GreetingRestful hello(@RequestParam(value="name", defaultValue = "World") String name) {
         return new GreetingRestful(counter.incrementAndGet(), String.format(template, name) );
     }

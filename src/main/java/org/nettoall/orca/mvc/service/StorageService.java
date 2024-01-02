@@ -11,7 +11,7 @@ public interface StorageService {
     public void store(MultipartFile file);
     public Stream<Path> loadAll();
     public Path load(String filename);
-    public Resource loadAsResouce(String filename);
+    public Resource loadAsResource(String filename);
     public void deleteAll();
 
 }
