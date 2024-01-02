@@ -7,11 +7,11 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 
 public interface StorageService {
-    public void init();
-    public void store(MultipartFile file);
-    public Stream<Path> loadAll();
-    public Path load(String filename);
-    public Resource loadAsResource(String filename);
-    public void deleteAll();
+    void init();
+    void store(MultipartFile file);
+    Stream<Path> loadAll();
+    Path load(String filename);
+    Resource loadAsResource(String filename);
+    void deleteAll();
 
 }

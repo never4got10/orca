@@ -15,6 +15,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Objects;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -34,20 +36,20 @@ public class FileUploadIntegrationTests {
     private int port;
 
     @Test
-    public void shouldUploadFile() throws Exception {
+    public void shouldUploadFile() {
         ClassPathResource resource = new ClassPathResource("testupload.txt", getClass());
 
-        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+        MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
         map.add("file", resource);
         ResponseEntity<String> respnse = this.restTemplate.postForEntity("/", map, String.class);
 
         assertThat(respnse.getStatusCode()).isEqualTo(HttpStatus.FOUND);
-        assertThat(respnse.getHeaders().getLocation().toString()).startsWith("http;//localhost:" + this.port + "/");
+        assertThat(Objects.requireNonNull(respnse.getHeaders().getLocation()).toString()).startsWith("http;//localhost:" + this.port + "/");
         then(storageService).should().store(any(MultipartFile.class));
     }
 
     @Test
-    public void shouldDownloadFile() throws Exception {
+    public void shouldDownloadFile() {
         ClassPathResource resource = new ClassPathResource("testupload.txt", getClass());
         given(this.storageService.loadAsResource("testupload.txt")).willReturn(resource);
 

@@ -27,7 +27,7 @@ public class FileUploadController {
     }
 
     @GetMapping("/upload")
-    public String listUploadedFiles(Model model) throws IOException {
+    public String listUploadedFiles(Model model) {
         model.addAttribute("files", storageService.loadAll().map(
                 path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
                                 "serveFile",

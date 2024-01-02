@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,7 +26,7 @@ public class WebSecurityConfig {
                         .loginPage("/login")     // login path 정의 - MvcConfig addViewControllers 로 정의됨
                         .permitAll()
                 )
-                .logout((logout) -> logout.permitAll());
+                .logout(LogoutConfigurer::permitAll);
 
         return http.build();
     }
@@ -33,7 +34,7 @@ public class WebSecurityConfig {
     /**
      * 메모리에 로그인할 사용자 한명에 대해 정의
      *
-     * @return
+     * @return UserDetailsService
      */
     @Bean
     public UserDetailsService userDetailsService() {

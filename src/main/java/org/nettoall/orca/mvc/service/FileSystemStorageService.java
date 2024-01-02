@@ -10,11 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.SocketException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 @Service
@@ -46,7 +46,7 @@ public class FileSystemStorageService implements StorageService{
             if(file.isEmpty()) {
                 throw new StorageException("Failed to store empty file");
             }
-            Path destinationFile = this.rootLocation.resolve(Paths.get(file.getOriginalFilename()))
+            Path destinationFile = this.rootLocation.resolve(Paths.get(Objects.requireNonNull(file.getOriginalFilename())))
                     .normalize().toAbsolutePath();
 
             if(!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
