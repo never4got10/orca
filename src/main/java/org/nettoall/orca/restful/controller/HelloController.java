@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Building a RESTful Web Service
- *
+ * <p>
  * 참고 @RestController 가 @Controller 와 @ResponseBody를 모두 포함하는 약어?
  */
 @RestController
@@ -25,10 +25,10 @@ public class HelloController {
      * Jackson2 의 MappingJackson2HttpMessggeConverter가 자동으로 GreetingRestful을
      * JSON 으로 변환
      *
-     * @param name
-     * @return
+     * @param name request로 접수한 param
+     * @return GreetingRestful representation
      */
-    @GetMapping("/hello")
+    @GetMapping("/hellorest")
     public GreetingRestful hello(@RequestParam(value="name", defaultValue = "World") String name) {
         return new GreetingRestful(counter.incrementAndGet(), String.format(template, name) );
     }
