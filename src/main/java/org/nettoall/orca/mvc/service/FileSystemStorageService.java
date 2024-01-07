@@ -1,12 +1,5 @@
 package org.nettoall.orca.mvc.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -17,11 +10,23 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 @Service
 public class FileSystemStorageService implements StorageService{
 
     private final Path rootLocation;
 
+    /**
+     * @EnableConfigurationProperties(StorageProperties.class) 설정 필요 SpringApplication 에 정의
+     *
+     * @param properties
+     */
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
         if(properties.getLocations().trim().length() == 0) {

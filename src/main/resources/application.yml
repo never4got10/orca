@@ -18,7 +18,13 @@ spring:
         use_sql_comments: true
         # hibernate 사용할 때에는 user 예약어로 인해 expected identifier 오류 발생할 때 조치
         globally_quoted_identifiers: true
+        globally_quoted_identifiers_skip_column_definitions: true
   servlet:
     multipart:
       max-file-size: 128KB
       max-request-size: 128KB
+
+management:
+  endpoint:
+    health:
+      enabled: false

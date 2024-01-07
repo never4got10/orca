@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    //id 'war'  // set packaging war. providedRuntime()을 위해 꼭 필요함
     id 'org.springframework.boot' version '3.2.0'
     id 'io.spring.dependency-management' version '1.1.4'
 }
@@ -30,13 +31,37 @@ dependencies {
 //    HATEOAS 추가 - REST API 에 해당 데이터로 할 수 있는 추가적인 기능을 제공(개념 어려움)
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 //    health, audits, beans 등 관리 서비스
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     // tag::security-dependencies[]
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
     // Temporary explicit version to fix Thymeleaf bug
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
     testImplementation 'org.springframework.security:spring-security-test'
     // end::security-dependencies[]
+    // tag::validate[]
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // end::validate[]
+    // tag::cache[]
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    // end::cache[]
+    // tag::redis[]
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    // end::redis[]
+    // tag::rabbitmq[]
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+    // end::rabbitmq[]
+    // tag::jms artemis[]
+    implementation 'org.springframework.boot:spring-boot-starter-artemis'
+    implementation 'org.springframework.boot:spring-boot-starter-json'
+//    runtimeOnly 'org.apache.activemq:artemis-jakarta-server'
+    // end::jsm artemis[]
+    // tag::jdbc transaction[]
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    // end::jdbc transaction[]
+    // tag::packaging Executable and Deployable WARS[]
+//    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    // end::packaging Executable and Deployable WAR[]
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
