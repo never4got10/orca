@@ -1,0 +1,2 @@
+GET https://api.github.com/users/nettoall
+Accept: application/vnd.github+json
